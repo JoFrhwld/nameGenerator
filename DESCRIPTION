@@ -1,0 +1,18 @@
+Package: nameGenerator
+Title: Name Generator
+Version: 0.1
+Authors@R: person("Josef", "Fruehwald", role = c("cre","aut"), email =
+    "jofrhwld@gmail.com")
+Description: What the package does (one paragraph)
+Depends:
+    R (>= 3.1.1),
+    babynames,
+    dplyr,
+    reshape2,
+    tau,
+    memoise
+License: MIT
+LazyData: true
+Suggests:
+    knitr
+VignetteBuilder: knitr

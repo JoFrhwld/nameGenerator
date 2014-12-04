@@ -1,0 +1,38 @@
+---
+title: "Most Probable Names"
+author: "Josef Fruehwald"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r}
+  library(nameGenerator)
+  library(dplyr)
+```
+
+## Probable Names
+```{r}
+  eras <- expand.grid(Year = seq(1880, 2010, by = 10),
+                      Sex = c("M","F"))
+```
+
+```{r}
+  eras %>%
+    group_by(Year, Sex)%>%
+    mutate(name = most_prob_name(Year = Year, Sex = Sex))
+```
+
+## Random Names
+
+Silliness
+
+```{r}
+  generate_n_names(30, Year = 2013, Sex = "M")
+
+  generate_n_names(30, Year = 2013, Sex = "F")
+```
+
