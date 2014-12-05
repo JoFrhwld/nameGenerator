@@ -6,7 +6,7 @@
 generate_name(Year = 1950, Sex = "F")
 }
 \description{
-Generates one name on the basis of transition probabilities from a given year
+Generates one name on the basis of bigram transition probabilities from a given year
 for a given sex.
 }
 \details{
@@ -14,7 +14,7 @@ Using data from the \code{babynames} package, this function will generate
 novel "names" using a Markov Chain based on transition probabilities for
 a given year and sex.
 
-Since the Markov Chains rarely land in the \code{end} state, this function
+This function
 also probabilistically ends the chain on the basis of how long the name
 currently is, based on the distribution of name lengths for the
 given year and sex.

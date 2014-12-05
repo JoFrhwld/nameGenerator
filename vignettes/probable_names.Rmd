@@ -26,6 +26,13 @@ vignette: >
     mutate(name = most_prob_name(Year = Year, Sex = Sex))
 ```
 
+### Bigrams -> Letter
+```{r}
+  eras %>%
+    group_by(Year, Sex)%>%
+    mutate(name = most_prob_name2(Year = Year, Sex = Sex))
+```
+
 ## Random Names
 
 Silliness
@@ -34,5 +41,19 @@ Silliness
   generate_n_names(30, Year = 2013, Sex = "M")
 
   generate_n_names(30, Year = 2013, Sex = "F")
+
+  generate_n_names(30, Year = 1913, Sex = "M")
+
+  generate_n_names(30, Year = 1913, Sex = "F")
 ```
 
+### Bigrams -> Letter
+```{r}
+  generate_n_names2(30, Year = 2013, Sex = "M")
+
+  generate_n_names2(30, Year = 2013, Sex = "F")
+
+  generate_n_names2(30, Year = 1913, Sex = "M")
+
+  generate_n_names2(30, Year = 1913, Sex = "F")
+```
