@@ -12,22 +12,23 @@ vignette: >
 ```{r}
   library(nameGenerator)
   library(dplyr)
+  library(knitr)
 ```
 
 ## Probable Names
 ```{r}
-  eras <- expand.grid(Year = seq(1880, 2010, by = 10),
+  eras <- expand.grid(Year = c(1880, 1910, 1950, 1990,2010),
                       Sex = c("M","F"))
 ```
 
-```{r}
+```{r warning=FALSE}
   eras %>%
     group_by(Year, Sex)%>%
     mutate(name = most_prob_name(Year = Year, Sex = Sex))
 ```
 
 ### Bigrams -> Letter
-```{r}
+```{r warning=FALSE}
   eras %>%
     group_by(Year, Sex)%>%
     mutate(name = most_prob_name2(Year = Year, Sex = Sex))
@@ -38,22 +39,22 @@ vignette: >
 Silliness
 
 ```{r}
-  generate_n_names(30, Year = 2013, Sex = "M")
+  generate_n_names(30, Year = 2010, Sex = "M")
 
-  generate_n_names(30, Year = 2013, Sex = "F")
+  generate_n_names(30, Year = 2010, Sex = "F")
 
-  generate_n_names(30, Year = 1913, Sex = "M")
+  generate_n_names(30, Year = 1910, Sex = "M")
 
-  generate_n_names(30, Year = 1913, Sex = "F")
+  generate_n_names(30, Year = 1910, Sex = "F")
 ```
 
 ### Bigrams -> Letter
 ```{r}
-  generate_n_names2(30, Year = 2013, Sex = "M")
+  generate_n_names2(30, Year = 2010, Sex = "M")
 
-  generate_n_names2(30, Year = 2013, Sex = "F")
+  generate_n_names2(30, Year = 2010, Sex = "F")
 
-  generate_n_names2(30, Year = 1913, Sex = "M")
+  generate_n_names2(30, Year = 1910, Sex = "M")
 
-  generate_n_names2(30, Year = 1913, Sex = "F")
+  generate_n_names2(30, Year = 1910, Sex = "F")
 ```

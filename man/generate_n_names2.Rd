@@ -5,11 +5,18 @@
 \usage{
 generate_n_names2(n = 1, Year = 1950, Sex = "F")
 }
+\arguments{
+\item{n}{the number of random names to generate}
+
+\item{Year}{the year from which training data is drawn}
+
+\item{Sex}{the sex from which training data is drawn}
+}
 \description{
 Calls \code{generate_name2()} \code{n} times.
 }
 \details{
-See \code{generate_name()}
+See \code{generate_name2()}
 
 The first time using \code{most_prob_name2()}, \code{generate_name2()} or
 \code{generate_n_names2()} with a unique Year and Sex combination may take

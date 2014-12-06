@@ -5,8 +5,13 @@
 \usage{
 most_prob_name2(Year = 1950, Sex = "F")
 }
+\arguments{
+\item{Year}{the year from which training data is drawn}
+
+\item{Sex}{the sex from which training data is drawn}
+}
 \description{
-Returns the most probable path through the bigram \eqn{\rightarrow}{→} character state space for
+Returns the most probable path through the bigram \eqn{\rightarrow}{->} character state space for
 a given year for a given sex.
 }
 \details{

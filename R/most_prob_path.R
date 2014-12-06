@@ -1,8 +1,9 @@
 #' Most Probable Path
 #'
-#' Returns the most probable path through the character \eqn{\rightarrow}{→} character state space for
+#' Returns the most probable path through the character \eqn{\rightarrow}{->} character state space for
 #' a given year for a given sex.
 #'
+#' @inheritParams generate_states
 #' @details
 #' The most probable path for most years and sexes is occasionally an infinite
 #' loop. When a path is about to loop infinitely, the path stops, and \code{:}
@@ -56,9 +57,9 @@ most_prob_name <- function(Year = 1950, Sex = "F"){
 
 #' Most Probable Path2
 #'
-#' Returns the most probable path through the bigram \eqn{\rightarrow}{→} character state space for
+#' Returns the most probable path through the bigram \eqn{\rightarrow}{->} character state space for
 #' a given year for a given sex.
-#'
+#' @inheritParams generate_states
 #' @details
 #' The most probable path for most years and sexes is occasionally an infinite
 #' loop. When a path is about to loop infinitely, the path stops, and \code{:}

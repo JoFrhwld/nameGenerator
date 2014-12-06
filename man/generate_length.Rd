@@ -5,6 +5,11 @@
 \usage{
 generate_length(Year = 1950, Sex = "F")
 }
+\arguments{
+\item{Year}{the year from which training data is drawn}
+
+\item{Sex}{the sex from which training data is drawn}
+}
 \description{
 Generate Length
 }

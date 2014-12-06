@@ -1,12 +1,13 @@
 Package: nameGenerator
 Title: Name Generator
-Version: 0.2
+Version: 0.2.1
 Authors@R: person("Josef", "Fruehwald", role = c("cre","aut"), email =
     "jofrhwld@gmail.com")
 Description: What the package does (one paragraph)
 Depends:
     R (>= 3.1.1),
-    babynames,
+    babynames
+Imports:
     dplyr,
     reshape2,
     tau,

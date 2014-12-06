@@ -5,6 +5,13 @@
 \usage{
 generate_n_names(n = 1, Year = 1950, Sex = "F")
 }
+\arguments{
+\item{n}{the number of random names to generate}
+
+\item{Year}{the year from which training data is drawn}
+
+\item{Sex}{the sex from which training data is drawn}
+}
 \description{
 Calls \code{generate_name()} \code{n} times.
 }

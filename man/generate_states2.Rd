@@ -5,6 +5,11 @@
 \usage{
 generate_states2(Year = 1950, Sex = "F")
 }
+\arguments{
+\item{Year}{the year from which training data is drawn}
+
+\item{Sex}{the sex from which training data is drawn}
+}
 \description{
 Generates the transition matrix from a bigram
 to the next character for a given year and sex.

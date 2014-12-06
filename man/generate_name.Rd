@@ -5,6 +5,11 @@
 \usage{
 generate_name(Year = 1950, Sex = "F")
 }
+\arguments{
+\item{Year}{the year from which training data is drawn}
+
+\item{Sex}{the sex from which training data is drawn}
+}
 \description{
 Generates one name on the basis of bigram transition probabilities from a given year
 for a given sex.

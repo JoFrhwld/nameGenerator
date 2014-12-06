@@ -3,6 +3,7 @@
 #' Generates one name on the basis of bigram transition probabilities from a given year
 #' for a given sex.
 #'
+#' @inheritParams generate_states
 #' @details
 #' Using data from the \code{babynames} package, this function will generate
 #' novel "names" using a Markov Chain based on transition probabilities for
@@ -65,7 +66,8 @@ generate_name <- function(Year = 1950, Sex = "F"){
 #' Generate N names
 #'
 #' Calls \code{generate_name()} \code{n} times.
-#'
+#' @inheritParams generate_states
+#' @param n the number of random names to generate
 #' @details
 #'
 #' See \code{generate_name()}
@@ -92,6 +94,8 @@ generate_n_names <- function(n = 1, Year = 1950, Sex = "F"){
 #' Generates one name on the basis of transition probabilities from bigrams to the next character
 #' from a given year for a given sex.
 #'
+#'
+#' @inheritParams generate_states
 #' @details
 #' Using data from the \code{babynames} package, this function will generate
 #' novel "names" using a Markov Chain based on transition probabilities from bigrams to the next character
@@ -164,10 +168,10 @@ generate_name2 <- function(Year = 1950, Sex = "F"){
 #' Generate N names
 #'
 #' Calls \code{generate_name2()} \code{n} times.
-#'
+#' @inheritParams generate_n_names
 #' @details
 #'
-#' See \code{generate_name()}
+#' See \code{generate_name2()}
 #'
 #' The first time using \code{most_prob_name2()}, \code{generate_name2()} or
 #' \code{generate_n_names2()} with a unique Year and Sex combination may take

@@ -3,6 +3,8 @@
 #' Generates the transition matrix from one character
 #' to the next for a given year and sex.
 #'
+#' @param Year the year from which training data is drawn
+#' @param Sex the sex from which training data is drawn
 #' @import babynames
 #' @importFrom tau textcnt
 #' @import dplyr
@@ -42,6 +44,7 @@ memStates <- memoise(generate_states)
 #' Generates the transition matrix from a bigram
 #' to the next character for a given year and sex.
 #'
+#' @inheritParams generate_states
 #' @import babynames
 #' @importFrom tau textcnt
 #' @import dplyr
@@ -73,6 +76,8 @@ generate_states2 <- function(Year = 1950, Sex = "F"){
 }
 
 #' Memoised States2
+#'
+#' @inheritParams generate_states
 #' @importFrom memoise memoise
 #' @export
 
@@ -81,7 +86,7 @@ memStates2 <- memoise(generate_states2)
 
 
 #' Generate Length
-#'
+#' @inheritParams generate_states
 #' @import babynames
 #' @import dplyr
 #' @export
@@ -98,7 +103,7 @@ generate_length <- function(Year = 1950, Sex = "F"){
 }
 
 #' Memoised Length
-#'
+#' @inheritParams generate_states
 #' @importFrom memoise memoise
 #' @export
 
