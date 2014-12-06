@@ -73,6 +73,9 @@ most_prob_name <- function(Year = 1950, Sex = "F"){
 #' @examples
 #' most_prob_name(Year = 1985, Sex = "M")
 #'
+#' @importFrom stringr str_count
+#' @importFrom stringr str_extract
+#'
 #' @export
 
 most_prob_name2 <- function(Year = 1950, Sex = "F"){

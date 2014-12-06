@@ -10,7 +10,7 @@
 
 <meta name="author" content="Josef Fruehwald" />
 
-<meta name="date" content="2014-12-05" />
+<meta name="date" content="2014-12-06" />
 
 <title>Most Probable Names</title>
 
@@ -54,221 +54,146 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">Most Probable Names</h1>
 <h4 class="author"><em>Josef Fruehwald</em></h4>
-<h4 class="date"><em>2014-12-05</em></h4>
+<h4 class="date"><em>2014-12-06</em></h4>
 </div>
 
 
 <pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">library</span>(nameGenerator)
   <span class="kw">library</span>(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'
+## 
+## The following object is masked from 'package:stats':
+## 
+##     filter
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">library</span>(knitr)</code></pre>
 <div id="probable-names" class="section level2">
 <h2>Probable Names</h2>
-<pre class="sourceCode r"><code class="sourceCode r">  eras &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">Year =</span> <span class="kw">seq</span>(<span class="dv">1880</span>, <span class="dv">2010</span>, <span class="dt">by =</span> <span class="dv">10</span>),
+<pre class="sourceCode r"><code class="sourceCode r">  eras &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">Year =</span> <span class="kw">c</span>(<span class="dv">1880</span>, <span class="dv">1910</span>, <span class="dv">1950</span>, <span class="dv">1990</span>,<span class="dv">2010</span>),
                       <span class="dt">Sex =</span> <span class="kw">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>))</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">  eras %&gt;%
 <span class="st">    </span><span class="kw">group_by</span>(Year, Sex)%&gt;%
 <span class="st">    </span><span class="kw">mutate</span>(<span class="dt">name =</span> <span class="kw">most_prob_name</span>(<span class="dt">Year =</span> Year, <span class="dt">Sex =</span> Sex))</code></pre>
-<pre><code>## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character</code></pre>
-<pre><code>## Source: local data frame [28 x 3]
+<pre><code>## Source: local data frame [10 x 3]
 ## Groups: Year, Sex
 ## 
 ##    Year Sex      name
 ## 1  1880   M Joharlil:
-## 2  1890   M    Johar.
-## 3  1900   M    Johar.
-## 4  1910   M   Johart.
-## 5  1920   M      Jon.
-## 6  1930   M      Jon.
-## 7  1940   M      Jon.
-## 8  1950   M      Jon.
-## 9  1960   M      Jon.
-## 10 1970   M      Jon.
-## 11 1980   M      Jon.
-## 12 1990   M      Jon.
-## 13 2000   M      Jan.
-## 14 2010   M      Jan.
-## 15 1880   F       Ma.
-## 16 1890   F       Ma.
-## 17 1900   F       Ma.
-## 18 1910   F       Ma.
-## 19 1920   F       Ma.
-## 20 1930   F       Ma.
-## 21 1940   F       Ma.
-## 22 1950   F       Ma.
-## 23 1960   F       Da.
-## 24 1970   F       Sa.
-## 25 1980   F        A.
-## 26 1990   F        A.
-## 27 2000   F        A.
-## 28 2010   F        A.</code></pre>
+## 2  1910   M   Johart.
+## 3  1950   M      Jon.
+## 4  1990   M      Jon.
+## 5  2010   M      Jan.
+## 6  1880   F       Ma.
+## 7  1910   F       Ma.
+## 8  1950   F       Ma.
+## 9  1990   F        A.
+## 10 2010   F        A.</code></pre>
 <div id="bigrams---letter" class="section level3">
 <h3>Bigrams -&gt; Letter</h3>
 <pre class="sourceCode r"><code class="sourceCode r">  eras %&gt;%
 <span class="st">    </span><span class="kw">group_by</span>(Year, Sex)%&gt;%
 <span class="st">    </span><span class="kw">mutate</span>(<span class="dt">name =</span> <span class="kw">most_prob_name2</span>(<span class="dt">Year =</span> Year, <span class="dt">Sex =</span> Sex))</code></pre>
-<pre><code>## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character
-## Warning: Unequal factor levels: coercing to character</code></pre>
-<pre><code>## Source: local data frame [28 x 3]
+<pre><code>## Source: local data frame [10 x 3]
 ## Groups: Year, Sex
 ## 
-##    Year Sex       name
-## 1  1880   M      John.
-## 2  1890   M      John.
-## 3  1900   M      John.
-## 4  1910   M      John.
-## 5  1920   M      John.
-## 6  1930   M      John.
-## 7  1940   M      John.
-## 8  1950   M      John.
-## 9  1960   M      John.
-## 10 1970   M      John.
-## 11 1980   M  Josepher.
-## 12 1990   M    Joshua.
-## 13 2000   M      Jose.
-## 14 2010   M   Jacolan.
-## 15 1880   F      Mary.
-## 16 1890   F      Mary.
-## 17 1900   F      Mary.
-## 18 1910   F      Mary.
-## 19 1920   F      Mary.
-## 20 1930   F      Mary.
-## 21 1940   F      Mary.
-## 22 1950   F      Mary.
-## 23 1960   F     Debra.
-## 24 1970   F Shannifer.
-## 25 1980   F     Amara.
-## 26 1990   F       Ale.
-## 27 2000   F      Aley.
-## 28 2010   F      Alia.</code></pre>
+##    Year Sex     name
+## 1  1880   M    John.
+## 2  1910   M    John.
+## 3  1950   M    John.
+## 4  1990   M  Joshua.
+## 5  2010   M Jacolan.
+## 6  1880   F    Mary.
+## 7  1910   F    Mary.
+## 8  1950   F    Mary.
+## 9  1990   F     Ale.
+## 10 2010   F    Alia.</code></pre>
 </div>
 </div>
 <div id="random-names" class="section level2">
 <h2>Random Names</h2>
 <p>Silliness</p>
-<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">2013</span>, <span class="dt">Sex =</span> <span class="st">&quot;M&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">2010</span>, <span class="dt">Sex =</span> <span class="st">&quot;M&quot;</span>)</code></pre>
 <pre><code>## Warning: Unequal factor levels: coercing to character</code></pre>
-<pre><code>##  [1] &quot;Colir&quot;   &quot;An.&quot;     &quot;Livion&quot;  &quot;Eseyso&quot;  &quot;Mabr.&quot;   &quot;Tttrb&quot;   &quot;Ethail&quot; 
-##  [8] &quot;Jasid.&quot;  &quot;Myser&quot;   &quot;Anon.&quot;   &quot;Jalib&quot;   &quot;Muex.&quot;   &quot;A.&quot;      &quot;Sack.&quot;  
-## [15] &quot;Ardeo&quot;   &quot;Vis.&quot;    &quot;B.&quot;      &quot;La&quot;      &quot;Lenth.&quot;  &quot;Bon.&quot;    &quot;Ja.&quot;    
-## [22] &quot;Cake&quot;    &quot;Cickav&quot;  &quot;Crthe.&quot;  &quot;Ck.&quot;     &quot;Mieah&quot;   &quot;Tin.&quot;    &quot;An.&quot;    
-## [29] &quot;Hachen&quot;  &quot;Lekewyl&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">2013</span>, <span class="dt">Sex =</span> <span class="st">&quot;F&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;Ay.&quot;     &quot;Cken&quot;    &quot;Sisagi&quot;  &quot;Ph&quot;      &quot;Riaew&quot;   &quot;Ahavi&quot;   &quot;The.&quot;   
+##  [8] &quot;Eli.&quot;    &quot;Ilas.&quot;   &quot;Sckis&quot;   &quot;Efieri&quot;  &quot;Le.&quot;     &quot;Janca&quot;   &quot;D.&quot;     
+## [15] &quot;Anyl.&quot;   &quot;Vyli&quot;    &quot;Jorl.&quot;   &quot;Gan.&quot;    &quot;Guerase&quot; &quot;Ph.&quot;     &quot;Jorer&quot;  
+## [22] &quot;Asolont&quot; &quot;Geo.&quot;    &quot;Gravas&quot;  &quot;Nnthu&quot;   &quot;Miasor&quot;  &quot;Joxtide&quot; &quot;Man.&quot;   
+## [29] &quot;M.&quot;      &quot;Mesen&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">2010</span>, <span class="dt">Sex =</span> <span class="st">&quot;F&quot;</span>)</code></pre>
 <pre><code>## Warning: Unequal factor levels: coercing to character</code></pre>
-<pre><code>##  [1] &quot;Mprph&quot;    &quot;Hamil&quot;    &quot;A.&quot;       &quot;Pheen.&quot;   &quot;A.&quot;       &quot;Rasarl&quot;  
-##  [7] &quot;E.&quot;       &quot;Math.&quot;    &quot;Alen&quot;     &quot;Fre.&quot;     &quot;Vaiany.&quot;  &quot;Lieler&quot;  
-## [13] &quot;A.&quot;       &quot;Elivkeb&quot;  &quot;Ha.&quot;      &quot;A.&quot;       &quot;Bivesoly&quot; &quot;A.&quot;      
-## [19] &quot;H.&quot;       &quot;Ky.&quot;      &quot;Kaamad&quot;   &quot;Fli.&quot;     &quot;Pelivi&quot;   &quot;Cllad&quot;   
-## [25] &quot;A.&quot;       &quot;An.&quot;      &quot;Bene.&quot;    &quot;Ava&quot;      &quot;Searita&quot;  &quot;Lle.&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">1913</span>, <span class="dt">Sex =</span> <span class="st">&quot;M&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;A.&quot;      &quot;Khrind&quot;  &quot;Ve.&quot;     &quot;Morie.&quot;  &quot;Rurylie&quot; &quot;Mah.&quot;    &quot;E.&quot;     
+##  [8] &quot;Ka.&quot;     &quot;Eory&quot;    &quot;E.&quot;      &quot;Asiali&quot;  &quot;Gron.&quot;   &quot;Llilynn&quot; &quot;E.&quot;     
+## [15] &quot;Cee.&quot;    &quot;Li.&quot;     &quot;Hon.&quot;    &quot;Ayevia&quot;  &quot;Memae.&quot;  &quot;Klad.&quot;   &quot;Elanay&quot; 
+## [22] &quot;Acadi&quot;   &quot;Aynin&quot;   &quot;Ay.&quot;     &quot;Asiyah&quot;  &quot;Incyle&quot;  &quot;Ka.&quot;     &quot;Emelils&quot;
+## [29] &quot;Belyl&quot;   &quot;Walite&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">1910</span>, <span class="dt">Sex =</span> <span class="st">&quot;M&quot;</span>)</code></pre>
 <pre><code>## Warning: Unequal factor levels: coercing to character</code></pre>
-<pre><code>##  [1] &quot;Maro&quot;   &quot;Lilbe&quot;  &quot;Men.&quot;   &quot;E.&quot;     &quot;Wid.&quot;   &quot;Gen.&quot;   &quot;K.&quot;    
-##  [8] &quot;Fr.&quot;    &quot;Jas.&quot;   &quot;S.&quot;     &quot;Menram&quot; &quot;Eldm&quot;   &quot;Giveg&quot;  &quot;Weldob&quot;
-## [15] &quot;K.&quot;     &quot;Ron.&quot;   &quot;James.&quot; &quot;Jon.&quot;   &quot;Jay.&quot;   &quot;Leror.&quot; &quot;Ss.&quot;   
-## [22] &quot;Jod&quot;    &quot;Rliam&quot;  &quot;Jowin.&quot; &quot;Jobrel&quot; &quot;Jorus.&quot; &quot;Lijas.&quot; &quot;R.&quot;    
-## [29] &quot;Rt.&quot;    &quot;H.&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">1913</span>, <span class="dt">Sex =</span> <span class="st">&quot;F&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;Wamialle&quot; &quot;Hue.&quot;     &quot;Jo.&quot;      &quot;Jameo&quot;    &quot;D.&quot;       &quot;Jond.&quot;   
+##  [7] &quot;A.&quot;       &quot;Rs.&quot;      &quot;Janes&quot;    &quot;Jart&quot;     &quot;Ld.&quot;      &quot;Gell&quot;    
+## [13] &quot;Clas.&quot;    &quot;Wia&quot;      &quot;Rgesth&quot;   &quot;Es.&quot;      &quot;El.&quot;      &quot;Wieus.&quot;  
+## [19] &quot;Sher&quot;     &quot;R.&quot;       &quot;Jandoy&quot;   &quot;Ckies&quot;    &quot;Winde&quot;    &quot;Rar.&quot;    
+## [25] &quot;Ged&quot;      &quot;Rrmug&quot;    &quot;Rd.&quot;      &quot;D.&quot;       &quot;Nrlte&quot;    &quot;Chadr&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">1910</span>, <span class="dt">Sex =</span> <span class="st">&quot;F&quot;</span>)</code></pre>
 <pre><code>## Warning: Unequal factor levels: coercing to character</code></pre>
-<pre><code>##  [1] &quot;Argicy.&quot; &quot;Garan.&quot;  &quot;Fllia&quot;   &quot;Arthe&quot;   &quot;R.&quot;      &quot;H.&quot;      &quot;Annethl&quot;
-##  [8] &quot;Gwiephe&quot; &quot;Gadep&quot;   &quot;E.&quot;      &quot;Elaure&quot;  &quot;Ly.&quot;     &quot;Adet.&quot;   &quot;Hari&quot;   
-## [15] &quot;L.&quot;      &quot;Hedat&quot;   &quot;Mied.&quot;   &quot;Dennarl&quot; &quot;Ka.&quot;     &quot;Wisaut&quot;  &quot;E.&quot;     
-## [22] &quot;Hiara&quot;   &quot;Mare.&quot;   &quot;He.&quot;     &quot;Ce.&quot;     &quot;Phese&quot;   &quot;Cile&quot;    &quot;Larjay&quot; 
-## [29] &quot;Elince&quot;  &quot;Ergn.&quot;</code></pre>
+<pre><code>##  [1] &quot;H.&quot;      &quot;Magion&quot;  &quot;Lly.&quot;    &quot;Ma.&quot;     &quot;Se.&quot;     &quot;Laclel&quot;  &quot;Iness.&quot; 
+##  [8] &quot;Mitil&quot;   &quot;Eosay.&quot;  &quot;Ma.&quot;     &quot;Ba.&quot;     &quot;E.&quot;      &quot;H.&quot;      &quot;Gida.&quot;  
+## [15] &quot;H.&quot;      &quot;A.&quot;      &quot;Ldazea&quot;  &quot;A.&quot;      &quot;Ceta.&quot;   &quot;Maubeor&quot; &quot;Pan.&quot;   
+## [22] &quot;Sa.&quot;     &quot;Hyry&quot;    &quot;Ca.&quot;     &quot;Ratlar&quot;  &quot;Clile&quot;   &quot;Ph.&quot;     &quot;La.&quot;    
+## [29] &quot;A.&quot;      &quot;Miclin&quot;</code></pre>
 <div id="bigrams---letter-1" class="section level3">
 <h3>Bigrams -&gt; Letter</h3>
-<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names2</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">2013</span>, <span class="dt">Sex =</span> <span class="st">&quot;M&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names2</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">2010</span>, <span class="dt">Sex =</span> <span class="st">&quot;M&quot;</span>)</code></pre>
 <pre><code>## Warning: Unequal factor levels: coercing to character</code></pre>
-<pre><code>##  [1] &quot;Vin.&quot;        &quot;Riel.&quot;       &quot;Der.&quot;        &quot;Alomarrew.&quot;  &quot;Jamel.&quot;     
-##  [6] &quot;Samichan.&quot;   &quot;Cyrah.&quot;      &quot;Dameterson.&quot; &quot;Uri.&quot;        &quot;Michaadin.&quot; 
-## [11] &quot;Henie.&quot;      &quot;Joenzer.&quot;    &quot;Luker.&quot;      &quot;Xanner.&quot;     &quot;Lejavyn.&quot;   
-## [16] &quot;Miamse.&quot;     &quot;Aley.&quot;       &quot;Sinny.&quot;      &quot;Lason.&quot;      &quot;Ber.&quot;       
-## [21] &quot;Wenjavin.&quot;   &quot;Tylan.&quot;      &quot;Jace.&quot;       &quot;Char.&quot;       &quot;An.&quot;        
-## [26] &quot;Ruiel.&quot;      &quot;Than.&quot;       &quot;Zayciotthi.&quot; &quot;Emin.&quot;       &quot;Calie.&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names2</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">2013</span>, <span class="dt">Sex =</span> <span class="st">&quot;F&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;Azac.&quot;               &quot;Isan.&quot;               &quot;Jesseb.&quot;            
+##  [4] &quot;Sueliain.&quot;           &quot;Braydeant.&quot;          &quot;Roy.&quot;               
+##  [7] &quot;Kae.&quot;                &quot;Min.&quot;                &quot;Akendo.&quot;            
+## [10] &quot;Natharlexandradden.&quot; &quot;Chas.&quot;               &quot;Evionnordarlor.&quot;    
+## [13] &quot;Eren.&quot;               &quot;Aden.&quot;               &quot;Noah.&quot;              
+## [16] &quot;Braydes.&quot;            &quot;Sin.&quot;                &quot;Noah.&quot;              
+## [19] &quot;Dangel.&quot;             &quot;Con.&quot;                &quot;Chew.&quot;              
+## [22] &quot;Ke.&quot;                 &quot;Se.&quot;                 &quot;Den.&quot;               
+## [25] &quot;Ph.&quot;                 &quot;Cob.&quot;                &quot;Mandrestianno.&quot;     
+## [28] &quot;Brale.&quot;              &quot;Dantophesaacon.&quot;     &quot;Austin.&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names2</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">2010</span>, <span class="dt">Sex =</span> <span class="st">&quot;F&quot;</span>)</code></pre>
 <pre><code>## Warning: Unequal factor levels: coercing to character</code></pre>
-<pre><code>##  [1] &quot;Milly.&quot;         &quot;Bery.&quot;          &quot;Ellucie.&quot;       &quot;Allyda.&quot;       
-##  [5] &quot;Sabele.&quot;        &quot;Ajose.&quot;         &quot;Emakimila.&quot;     &quot;Kayla.&quot;        
-##  [9] &quot;Myah.&quot;          &quot;Ha.&quot;            &quot;Rooklyn.&quot;       &quot;Isanjadeliley.&quot;
-## [13] &quot;Sinedy.&quot;        &quot;Abell.&quot;         &quot;Grana.&quot;         &quot;Scarley.&quot;      
-## [17] &quot;Chaillexa.&quot;     &quot;Kalia.&quot;         &quot;Viottery.&quot;      &quot;Camianie.&quot;     
-## [21] &quot;Na.&quot;            &quot;Chenziella.&quot;    &quot;Sophia.&quot;        &quot;Sum.&quot;          
-## [25] &quot;Zoe.&quot;           &quot;Sada.&quot;          &quot;Dele.&quot;          &quot;Noryn.&quot;        
-## [29] &quot;Ka.&quot;            &quot;Gra.&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names2</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">1913</span>, <span class="dt">Sex =</span> <span class="st">&quot;M&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;Haricitla.&quot;      &quot;Jadandanna.&quot;     &quot;Marmon.&quot;        
+##  [4] &quot;Dan.&quot;            &quot;Ariangencellia.&quot; &quot;Julia.&quot;         
+##  [7] &quot;Alee.&quot;           &quot;Na.&quot;             &quot;Addisa.&quot;        
+## [10] &quot;Aile.&quot;           &quot;Lyn.&quot;            &quot;Cla.&quot;           
+## [13] &quot;Maceccallina.&quot;   &quot;Guinevel.&quot;       &quot;Baise.&quot;         
+## [16] &quot;Kene.&quot;           &quot;Ava.&quot;            &quot;Alia.&quot;          
+## [19] &quot;Alyn.&quot;           &quot;Kaycie.&quot;         &quot;Mayla.&quot;         
+## [22] &quot;Ka.&quot;             &quot;Jaya.&quot;           &quot;Bris.&quot;          
+## [25] &quot;Eslyn.&quot;          &quot;Kimary.&quot;         &quot;Dakalilia.&quot;     
+## [28] &quot;Shaynna.&quot;        &quot;Embelly.&quot;        &quot;Madeva.&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names2</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">1910</span>, <span class="dt">Sex =</span> <span class="st">&quot;M&quot;</span>)</code></pre>
 <pre><code>## Warning: Unequal factor levels: coercing to character</code></pre>
-<pre><code>##  [1] &quot;Cur.&quot;            &quot;Nolas.&quot;          &quot;Thomas.&quot;        
-##  [4] &quot;Vin.&quot;            &quot;Frank.&quot;          &quot;Georger.&quot;       
-##  [7] &quot;Clar.&quot;           &quot;Chomes.&quot;         &quot;Mes.&quot;           
-## [10] &quot;Leorgeord.&quot;      &quot;Thence.&quot;         &quot;Chen.&quot;          
-## [13] &quot;Rold.&quot;           &quot;Ran.&quot;            &quot;Les.&quot;           
-## [16] &quot;Hart.&quot;           &quot;Winsonseph.&quot;     &quot;Josse.&quot;         
-## [19] &quot;Thoward.&quot;        &quot;Rober.&quot;          &quot;Gelond.&quot;        
-## [22] &quot;Ham.&quot;            &quot;Joselart.&quot;       &quot;Freuglenniames.&quot;
-## [25] &quot;Paubert.&quot;        &quot;Robencis.&quot;       &quot;Evesterber.&quot;    
-## [28] &quot;Jack.&quot;           &quot;Waren.&quot;          &quot;Borexie.&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names2</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">1913</span>, <span class="dt">Sex =</span> <span class="st">&quot;F&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;Nion.&quot;                &quot;Jamesseph.&quot;           &quot;Rold.&quot;               
+##  [4] &quot;Rober.&quot;               &quot;Williames.&quot;           &quot;Hank.&quot;               
+##  [7] &quot;Hard.&quot;                &quot;Ald.&quot;                 &quot;Heonallawremmick.&quot;   
+## [10] &quot;Willeorgeor.&quot;         &quot;Lard.&quot;                &quot;Nie.&quot;                
+## [13] &quot;Frank.&quot;               &quot;Edmueltomaspetthomar&quot; &quot;Floydneterichand.&quot;   
+## [16] &quot;Cy.&quot;                  &quot;Oseph.&quot;               &quot;Gilliames.&quot;          
+## [19] &quot;Her.&quot;                 &quot;Clauliam.&quot;            &quot;Owaltony.&quot;           
+## [22] &quot;Rance.&quot;               &quot;Guan.&quot;                &quot;Germaxwes.&quot;          
+## [25] &quot;Gert.&quot;                &quot;Jes.&quot;                 &quot;Mes.&quot;                
+## [28] &quot;Adde.&quot;                &quot;Cliam.&quot;               &quot;Robence.&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">generate_n_names2</span>(<span class="dv">30</span>, <span class="dt">Year =</span> <span class="dv">1910</span>, <span class="dt">Sex =</span> <span class="st">&quot;F&quot;</span>)</code></pre>
 <pre><code>## Warning: Unequal factor levels: coercing to character</code></pre>
-<pre><code>##  [1] &quot;Flothy.&quot;         &quot;Gerth.&quot;          &quot;Lorettencessie.&quot;
-##  [4] &quot;Emarguel.&quot;       &quot;Hellie.&quot;         &quot;Jeanny.&quot;        
-##  [7] &quot;Issine.&quot;         &quot;Loroth.&quot;         &quot;Ruthen.&quot;        
-## [10] &quot;Phie.&quot;           &quot;Birettance.&quot;     &quot;Georie.&quot;        
-## [13] &quot;Vice.&quot;           &quot;Agne.&quot;           &quot;Irebessiethele.&quot;
-## [16] &quot;Eline.&quot;          &quot;Ance.&quot;           &quot;Jesth.&quot;         
-## [19] &quot;Sylva.&quot;          &quot;Luernes.&quot;        &quot;Emildred.&quot;      
-## [22] &quot;Anorothel.&quot;      &quot;Lucilaulin.&quot;     &quot;Marlor.&quot;        
-## [25] &quot;Mernie.&quot;         &quot;Katty.&quot;          &quot;Ma.&quot;            
-## [28] &quot;Hertleon.&quot;       &quot;Da.&quot;             &quot;Ella.&quot;</code></pre>
+<pre><code>##  [1] &quot;Lucililice.&quot;          &quot;Anorothy.&quot;            &quot;Viola.&quot;              
+##  [4] &quot;Sopaura.&quot;             &quot;Sophina.&quot;             &quot;Alineannice.&quot;        
+##  [7] &quot;Lie.&quot;                 &quot;Lucy.&quot;                &quot;Leoncha.&quot;            
+## [10] &quot;Mae.&quot;                 &quot;Liane.&quot;               &quot;Lie.&quot;                
+## [13] &quot;Anna.&quot;                &quot;Gla.&quot;                 &quot;Sarl.&quot;               
+## [16] &quot;Emmamillizaberna.&quot;    &quot;Clah.&quot;                &quot;Gerthertruthy.&quot;      
+## [19] &quot;Na.&quot;                  &quot;Dolouisephnnaommamin&quot; &quot;Irgine.&quot;             
+## [22] &quot;Alda.&quot;                &quot;Mabeste.&quot;             &quot;Herthy.&quot;             
+## [25] &quot;Floise.&quot;              &quot;Ida.&quot;                 &quot;Anne.&quot;               
+## [28] &quot;Lenie.&quot;               &quot;Emmaura.&quot;             &quot;Rutheleon.&quot;</code></pre>
 </div>
 </div>
 
